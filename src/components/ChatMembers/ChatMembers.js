@@ -81,10 +81,20 @@ const ChatMembers = ({ socket }) => {
     });
   }, [memberList, boxSize]);
 
+  function hideChatMembers() {
+    const chatMemberBox = document.getElementsByClassName("chatMembers")[0];
+    chatMemberBox.style.transform = "translateX(100%)";
+    chatMemberBox.style.opacity = 0;
+  }
+
   return (
     <div className="chatMembers">
       <div className="membersHeader">
         <h4>Chat Members</h4>
+        <div className="memeberListIconView" onClick={hideChatMembers}>
+          <i className="fa-solid fa-chevron-left"></i>
+          <i className="fa-solid fa-chevron-left"></i>
+        </div>
       </div>
       <div className="memberList">
         {memberList.map((element, id) => (

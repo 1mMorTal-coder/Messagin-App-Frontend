@@ -17,6 +17,8 @@
   /* box-shadow: 0px 0px 2px 5px #30363d; */
   border-radius: 6px;
   display: flex;
+  position: relative;
+  overflow: hidden;
 }
 .chatSection > .chatMembers {
   width: 0;

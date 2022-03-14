@@ -28,11 +28,14 @@
   scrollbar-width: thin;
   scrollbar-color: #373f44;
 }
-
-@media only screen and (max-width: 700px) {
-  .chatMembers {
-    display: none;
-  }
+.memeberListIconView {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  left: 20px;
+  height: 40px;
+  transform: rotateY(180deg);
+  visibility: hidden;
 }
 
 .memberList::-webkit-scrollbar {
@@ -48,4 +51,29 @@
   border-radius: 10px;
 
   /* outline: 1px solid slategrey; */
+}
+@media only screen and (max-width: 800px) {
+  .membersHeader {
+    height: 50px;
+  }
+  .chatMembers {
+    position: absolute;
+    z-index: 2;
+    width: 50% !important;
+    height: calc(100% - 65px);
+    border-radius: 0 0 10px 10px;
+    right: 0px;
+    overflow: hidden;
+    transform: translateX(100%);
+    opacity: 0;
+    transition: 300ms transform ease-out, 350ms opacity ease-out;
+  }
+  .memeberListIconView {
+    visibility: visible;
+  }
+}
+@media only screen and (max-width: 500px) {
+  .chatMembers {
+    width: 70% !important;
+  }
 }
