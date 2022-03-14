@@ -53,10 +53,8 @@ const ChatInput = ({ message, setMessage, setSendMessage, socket }) => {
         if (
           e.inputType === "insertParagraph" ||
           (e.inputType === "insertText" && e.data === null)
-        ) {
-          console.log("enter");
+        )
           document.getElementsByClassName("fa-paper-plane")[0].click();
-        }
       }
       setUserMessage(messageDiv.current.innerText);
     }
@@ -140,7 +138,7 @@ const ChatInput = ({ message, setMessage, setSendMessage, socket }) => {
           contentEditable="true"
           title="Type a message"
           onPaste={(e) => {
-            console.log("Pasted", e);
+            // console.log("Pasted", e);
           }}></div>
       </div>
       <div className="sendBtn">

@@ -15,10 +15,6 @@ const ChatScreen = ({
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    console.log("CurrentUser: ", currentUser);
-  }, [currentUser]);
-
-  useEffect(() => {
     if (sendMessage) {
       const msgData = {
         message: message.trim(),
@@ -46,7 +42,6 @@ const ChatScreen = ({
           if ((currentMessageTime - previousMessageTime) / (1000 * 60) < 2)
             previousTextMessage.showUserInfo = false;
         }
-        console.log(messageListClone);
         return [...messageListClone, msgData];
       });
       setMessage("");
@@ -62,7 +57,6 @@ const ChatScreen = ({
   //socket Logic
   useEffect(() => {
     socket.on("newMemberJoined", (newMemberInfo) => {
-      console.log("new member");
       setMessageList((messageList) => {
         return [
           ...messageList,

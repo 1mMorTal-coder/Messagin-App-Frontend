@@ -14,7 +14,6 @@ const ChatMembers = ({ socket }) => {
 
   useEffect(() => {
     socket.emit("userInfo", { currentUser });
-    console.log("newMemberJoined emited");
     socket.emit("newMemberJoined", currentUser);
     socket.on("memberList", (memberInfo) => {
       setMemberList([...memberInfo]);

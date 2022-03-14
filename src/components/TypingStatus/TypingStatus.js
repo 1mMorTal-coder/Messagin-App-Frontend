@@ -8,20 +8,8 @@ const TypingStatus = ({ socket }) => {
   const [typerInfo, setTyperInfo] = useState(currentUser);
   const typingStatus = useRef();
 
-  // useEffect(() => {
-  //   function typingUserUpdate(typingUser) {
-  //     if (typingStatus.current.classList.contains("typing")) return;
-  //     setTyperInfo(typingUser);
-  //     console.log("userSet: ", typingUser);
-  //   }
-  //   socket.on("animateMemberList", typingUserUpdate);
-  //   return () => {
-  //     socket.off("animateMemberList", typingUserUpdate);
-  //   };
-  // }, [setTyperInfo, socket]);
-
   useEffect(() => {
-    function typing(userTyping) {
+    function typing() {
       if (typingStatus.current.classList.contains("typing")) return;
 
       const memberBox = document.getElementsByClassName("memberList")[0];
