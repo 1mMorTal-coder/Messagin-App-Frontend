@@ -1,0 +1,31 @@
+.typingStatus {
+  background-color: #0b141a;
+}
+.typingContent {
+  bottom: 1px;
+  /* position: absolute; */
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+  gap: 8px;
+  visibility: hidden;
+  transition: 200ms ease-out;
+  transform: translateY(20px);
+}
+.typingContent.typing {
+  transform: translateY(0px);
+  visibility: visible;
+}
+
+p {
+  color: #60626d;
+  font-size: 0.85rem;
+}
+
+.fa-pencil {
+  color: #ee637c;
+  font-size: 0.8rem;
+}
+.typerName > span {
+  color: #ee637c;
+}
