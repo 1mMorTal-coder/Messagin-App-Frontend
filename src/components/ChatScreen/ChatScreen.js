@@ -28,8 +28,27 @@ const ChatScreen = ({
         userId: currentUser.userId,
         showUserInfo: true,
       };
+
       socket.emit("sendMessage", { messageData: msgData });
-      setMessageList((messageList) => [...messageList, msgData]);
+      setMessageList((messageList) => {
+        const messageListClone = messageList;
+        let previousTextMessage = null;
+        for (let i = messageList.length - 1; i >= 0; i--) {
+          if (msgData.userId !== messageListClone[i].userId) break;
+          if (messageList[i].message) {
+            previousTextMessage = messageListClone[i];
+            break;
+          }
+        }
+        if (previousTextMessage) {
+          const currentMessageTime = msgData.timestamp;
+          const previousMessageTime = previousTextMessage.timestamp;
+          if ((currentMessageTime - previousMessageTime) / (1000 * 60) < 2)
+            previousTextMessage.showUserInfo = false;
+        }
+        console.log(messageListClone);
+        return [...messageListClone, msgData];
+      });
       setMessage("");
       setSendMessage(false);
     }

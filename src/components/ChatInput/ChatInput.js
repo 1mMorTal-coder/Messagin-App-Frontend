@@ -49,7 +49,6 @@ const ChatInput = ({ message, setMessage, setSendMessage, socket }) => {
 
   useEffect(() => {
     function messageInputset(e) {
-      console.log(e);
       if (!window.matchMedia("(max-width: 800px)").matches) {
         if (
           e.inputType === "insertParagraph" ||
