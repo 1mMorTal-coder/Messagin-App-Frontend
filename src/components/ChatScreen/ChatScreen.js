@@ -3,16 +3,16 @@ import TextMessage from "../TextMessage/TextMessage";
 import { useAuth } from "../../context/AuthContext";
 import "./ChatScreen.css";
 import TypingStatus from "../TypingStatus/TypingStatus";
+import { useSocket } from "../../context/SocketContext";
 
-const ChatScreen = ({
-  message,
-  sendMessage,
-  setMessage,
-  setSendMessage,
-  socket,
-}) => {
+const ChatScreen = ({ message, sendMessage, setMessage, setSendMessage }) => {
   const { currentUser } = useAuth();
+  const { socket } = useSocket();
   const [messageList, setMessageList] = useState([]);
+
+  useEffect(() => {
+    console.log("Socket: ", socket);
+  }, [socket]);
 
   useEffect(() => {
     if (sendMessage) {
@@ -104,7 +104,7 @@ const ChatScreen = ({
           );
         })}
       </div>
-      <TypingStatus socket={socket} />
+      <TypingStatus />
     </>
   );
 };

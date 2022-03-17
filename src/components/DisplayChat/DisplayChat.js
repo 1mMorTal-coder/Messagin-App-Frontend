@@ -4,7 +4,7 @@ import "./DisplayChat.css";
 import ChatInput from "../ChatInput/ChatInput";
 import ChatScreen from "../ChatScreen/ChatScreen";
 
-const DisplayChat = ({ socket }) => {
+const DisplayChat = () => {
   const [message, setMessage] = useState("");
   const [sendMessage, setSendMessage] = useState(false);
 
@@ -55,10 +55,8 @@ const DisplayChat = ({ socket }) => {
         sendMessage={sendMessage}
         setMessage={setMessage}
         setSendMessage={setSendMessage}
-        socket={socket}
       />
       <ChatInput
-        socket={socket}
         message={message}
         setMessage={setMessage}
         setSendMessage={setSendMessage}

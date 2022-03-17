@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useSocket } from "../../context/SocketContext";
 import MemberTab from "../MemberTab/MemberTab";
 import "./ChatMembers.css";
 
-const ChatMembers = ({ socket }) => {
+const ChatMembers = () => {
   const mountCount = useRef(0);
+  const { socket } = useSocket();
   const { currentUser } = useAuth();
   const [memberList, setMemberList] = useState([]);
 
@@ -98,7 +100,7 @@ const ChatMembers = ({ socket }) => {
       </div>
       <div className="memberList">
         {memberList.map((element, id) => (
-          <MemberTab memberInfo={element} key={id} socket={socket} />
+          <MemberTab memberInfo={element} key={id} />
         ))}
       </div>
     </div>

@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import "./TypingStatus.css";
 import { useAuth } from "../../context/AuthContext";
+import { useSocket } from "../../context/SocketContext";
 
-const TypingStatus = ({ socket }) => {
+const TypingStatus = () => {
+  const { socket } = useSocket();
   const { currentUser } = useAuth();
   const [typerInfo, setTyperInfo] = useState(currentUser);
   const typingStatus = useRef();

@@ -1,9 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { useSocket } from "../../context/SocketContext";
 import "./ChatInput.css";
 
-const ChatInput = ({ message, setMessage, setSendMessage, socket }) => {
+const ChatInput = ({ message, setMessage, setSendMessage }) => {
   const { currentUser } = useAuth();
+  const { socket } = useSocket();
   const [userMessage, setUserMessage] = useState("");
   const emojiPicker = useRef();
   const emojiIcon = useRef();

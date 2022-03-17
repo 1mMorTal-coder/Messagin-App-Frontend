@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useSocket } from "../../context/SocketContext";
 import UserAvatar from "../UserAvatar/UserAvatar";
 import "./MemberTab.css";
 
-const MemberTab = ({ memberInfo, socket }) => {
+const MemberTab = ({ memberInfo }) => {
+  const { socket } = useSocket();
   const [typingStatus, setTypingstatus] = useState(false);
 
   useEffect(() => {
