@@ -11,10 +11,6 @@ const ChatScreen = ({ message, sendMessage, setMessage, setSendMessage }) => {
   const [messageList, setMessageList] = useState([]);
 
   useEffect(() => {
-    console.log("Socket: ", socket);
-  }, [socket]);
-
-  useEffect(() => {
     if (sendMessage) {
       const msgData = {
         message: message.trim(),

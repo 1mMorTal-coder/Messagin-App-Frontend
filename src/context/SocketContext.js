@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import io from "socket.io-client";
 
-const socket = io.connect("http://192.168.29.250:8080");
+const socket = io.connect("https://messaging-chill-hub-backend.herokuapp.com");
 
 const SocketContext = React.createContext();
 
