@@ -69,9 +69,9 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
   }, [setUserMessage, socket, currentUser]);
 
   useEffect(() => {
-    if (messageDiv.current.textContent.length)
+    if (messageDiv.current.textContent.length) {
       document.getElementsByClassName("inputTitle")[0].style.display = "none";
-    else
+    } else
       document.getElementsByClassName("inputTitle")[0].style.display = "block";
   }, [userMessage, message]);
 
@@ -140,7 +140,17 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
           contentEditable="true"
           title="Type a message"
           onPaste={(e) => {
-            // console.log("Pasted", e);
+            const paste = (e.clipboardData || window.clipboardData).getData(
+              "text"
+            );
+            e.target.innerText += paste;
+            e.target.scrollTop = e.target.scrollHeight;
+            setUserMessage((userMessage) => userMessage + paste);
+
+            window.getSelection().selectAllChildren(messageDiv.current);
+            window.getSelection().collapseToEnd();
+
+            e.preventDefault();
           }}></div>
       </div>
       <div className="sendBtn">
