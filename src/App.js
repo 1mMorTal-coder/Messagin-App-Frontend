@@ -4,8 +4,22 @@ import { Routes, Route } from "react-router-dom";
 import PageNotFound from "./components/PageNotFound/PageNotfound";
 import LoginPage from "./components/LoginPage/LoginPage";
 import PrivateRoute from "./PrivateRoute";
+import { useEffect } from "react";
 
 function App() {
+  useEffect(() => {
+    function setViewportHeight() {
+      // First we get the viewport height and we multiple it by 1% to get a value for a vh unit
+      let vh = window.innerHeight * 0.01;
+      // Then we set the value in the --vh custom property to the root of the document
+      document.documentElement.style.setProperty("--vh", `${vh}px`);
+    }
+    setViewportHeight();
+    window.addEventListener("resize", setViewportHeight);
+
+    return () => window.removeEventListener("resize", setViewportHeight);
+  }, []);
+
   return (
     <div className="App">
       <Routes>
