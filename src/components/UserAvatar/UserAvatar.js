@@ -1,10 +1,16 @@
 import React from "react";
 import "./UserAvatar.css";
+import defaultAvatar from "../../assets/3dAvatar.png";
 
 const UserAvatar = ({ imgSrc, size }) => {
+  function errorImage(e) {
+    console.log(e.target);
+    e.target.src = defaultAvatar;
+    e.target.onerror = "";
+  }
   return (
     <div className="userAvatar" style={{ height: size, width: size }}>
-      <img src={`${imgSrc}`} alt="userImage" />
+      <img src={`${imgSrc}`} onError={errorImage} alt="userImage" />
     </div>
   );
 };
