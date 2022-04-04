@@ -4,7 +4,6 @@ import defaultAvatar from "../../assets/3dAvatar.png";
 
 const UserAvatar = ({ imgSrc, size }) => {
   function errorImage(e) {
-    console.log(e.target);
     e.target.src = defaultAvatar;
     e.target.onerror = "";
   }
