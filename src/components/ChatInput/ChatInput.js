@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import { useAuth } from "../../context/AuthContext";
-import { useSocket } from "../../context/SocketContext";
-import "./ChatInput.css";
+import React, { useEffect, useRef, useState } from 'react';
+import { useAuth } from '../../context/AuthContext';
+import { useSocket } from '../../context/SocketContext';
+import './ChatInput.css';
 
 const ChatInput = ({ message, setMessage, setSendMessage }) => {
   const { currentUser } = useAuth();
   const { socket } = useSocket();
-  const [userMessage, setUserMessage] = useState("");
+  const [userMessage, setUserMessage] = useState('');
   const emojiPicker = useRef();
   const emojiIcon = useRef();
   const messageDiv = useRef();
@@ -18,14 +18,14 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
 
   useEffect(() => {
     document
-      .getElementsByTagName("body")[0]
-      .addEventListener("click", emojiHide);
+      .getElementsByTagName('body')[0]
+      .addEventListener('click', emojiHide);
 
     function emojiHide(e) {
       if (e.target === emojiIcon.current) return;
       if (!(e.target === emojiPicker.current)) {
-        emojiPicker.current.classList.add("emojiHide");
-        emojiPicker.current.style.display = "none";
+        emojiPicker.current.classList.add('emojiHide');
+        emojiPicker.current.style.display = 'none';
       }
     }
     function emojiPick(e) {
@@ -39,51 +39,51 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
       window.getSelection().collapseToEnd();
     }
     const emojiPickerVariable = emojiPicker.current;
-    emojiPicker.current.classList.add("emojiHide");
-    emojiPicker.current.addEventListener("emoji-click", emojiPick);
+    emojiPicker.current.classList.add('emojiHide');
+    emojiPicker.current.addEventListener('emoji-click', emojiPick);
     return () => {
-      emojiPickerVariable.removeEventListener("emoji-click", emojiPick);
+      emojiPickerVariable.removeEventListener('emoji-click', emojiPick);
       document
-        .getElementsByTagName("body")[0]
-        .removeEventListener("click", emojiHide);
+        .getElementsByTagName('body')[0]
+        .removeEventListener('click', emojiHide);
     };
   }, [setUserMessage]);
 
   useEffect(() => {
     function messageInputset(e) {
-      if (!window.matchMedia("(max-width: 800px)").matches) {
+      if (!window.matchMedia('(max-width: 800px)').matches) {
         if (
-          e.inputType === "insertParagraph" ||
-          (e.inputType === "insertText" && e.data === null)
+          e.inputType === 'insertParagraph' ||
+          (e.inputType === 'insertText' && e.data === null)
         )
-          document.getElementsByClassName("fa-paper-plane")[0].click();
+          document.getElementsByClassName('fa-paper-plane')[0].click();
       }
       setUserMessage(messageDiv.current.innerText);
     }
-    const chatDiv = document.getElementsByClassName("chatToSend")[0];
+    const chatDiv = document.getElementsByClassName('chatToSend')[0];
     chatDiv.style.width = `${chatDiv.offsetWidth}px`;
-    messageDiv.current.addEventListener("input", messageInputset);
+    messageDiv.current.addEventListener('input', messageInputset);
 
     const msgdiv = messageDiv.current;
-    return () => msgdiv.removeEventListener("input", messageInputset);
+    return () => msgdiv.removeEventListener('input', messageInputset);
   }, [setUserMessage, socket, currentUser]);
 
   useEffect(() => {
     if (messageDiv.current.textContent.length) {
-      document.getElementsByClassName("inputTitle")[0].style.display = "none";
+      document.getElementsByClassName('inputTitle')[0].style.display = 'none';
     } else
-      document.getElementsByClassName("inputTitle")[0].style.display = "block";
+      document.getElementsByClassName('inputTitle')[0].style.display = 'block';
   }, [userMessage, message]);
 
   useEffect(() => {
     function setInputWidth() {
       const currentChatWidth =
-        document.getElementsByClassName("chatInput")[0].offsetWidth;
-      const chatDiv = document.getElementsByClassName("chatToSend")[0];
+        document.getElementsByClassName('chatInput')[0].offsetWidth;
+      const chatDiv = document.getElementsByClassName('chatToSend')[0];
       chatDiv.style.width = `${currentChatWidth - 25 - 48 - 20}px`;
     }
-    window.addEventListener("resize", setInputWidth);
-    return () => window.removeEventListener("resize", setInputWidth);
+    window.addEventListener('resize', setInputWidth);
+    return () => window.removeEventListener('resize', setInputWidth);
   }, []);
 
   function sendMessage() {
@@ -92,14 +92,14 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
     setUserMessage(messageDiv.current.innerText.trim());
     setMessage(messageDiv.current.innerText.trim());
     setSendMessage(true);
-    messageDiv.current.innerText = "";
+    messageDiv.current.innerText = '';
   }
 
   useEffect(() => {
     let typingSignalId;
     if (mountCount.current >= 2) {
       typingSignalId = setTimeout(() => {
-        socket.emit("typing", currentUser);
+        socket.emit('typing', currentUser);
       }, 100);
     }
 
@@ -108,11 +108,11 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
 
   useEffect(() => {
     if (mountCount.current < 2) return;
-    const typingContent = document.getElementsByClassName("typingContent")[0];
-    if (typingContent.classList.contains("typing")) return;
-    typingContent.classList.add("typing");
+    const typingContent = document.getElementsByClassName('typingContent')[0];
+    if (typingContent.classList.contains('typing')) return;
+    typingContent.classList.add('typing');
     setTimeout(() => {
-      typingContent.classList.remove("typing");
+      typingContent.classList.remove('typing');
     }, 2000);
   }, [userMessage]);
 
@@ -123,10 +123,10 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
           ref={emojiIcon}
           className="fa-solid fa-face-grin-beam"
           onClick={() => {
-            emojiPicker.current.classList.toggle("emojiHide");
-            if (emojiPicker.current.classList.contains("emojiHide"))
-              emojiPicker.current.style.display = "none";
-            else emojiPicker.current.style.display = "block";
+            emojiPicker.current.classList.toggle('emojiHide');
+            if (emojiPicker.current.classList.contains('emojiHide'))
+              emojiPicker.current.style.display = 'none';
+            else emojiPicker.current.style.display = 'block';
           }}></i>
         <emoji-picker ref={emojiPicker} className="emojiHide"></emoji-picker>
       </div>
@@ -141,7 +141,7 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
           title="Type a message"
           onPaste={(e) => {
             const paste = (e.clipboardData || window.clipboardData).getData(
-              "text"
+              'text'
             );
             e.target.innerText += paste;
             e.target.scrollTop = e.target.scrollHeight;

@@ -1,28 +1,28 @@
-import React, { useState } from "react";
-import "emoji-picker-element";
-import "./DisplayChat.css";
-import ChatInput from "../ChatInput/ChatInput";
-import ChatScreen from "../ChatScreen/ChatScreen";
+import React, { useState } from 'react';
+import 'emoji-picker-element';
+import './DisplayChat.css';
+import ChatInput from '../ChatInput/ChatInput';
+import ChatScreen from '../ChatScreen/ChatScreen';
 
 const DisplayChat = () => {
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState('');
   const [sendMessage, setSendMessage] = useState(false);
 
   const boxSize = getComputedStyle(
-    document.getElementsByTagName("html")[0]
-  ).getPropertyValue("--memberBoxSize");
+    document.getElementsByTagName('html')[0]
+  ).getPropertyValue('--memberBoxSize');
 
   function chatMemberDisplay() {
-    const chatMemberBox = document.getElementsByClassName("chatMembers")[0];
-    chatMemberBox.style.transform = "translateX(0)";
+    const chatMemberBox = document.getElementsByClassName('chatMembers')[0];
+    chatMemberBox.style.transform = 'translateX(0)';
     chatMemberBox.style.opacity = 1;
     const chatMemberList = Array.from(
-      document.getElementsByClassName("memberList")[0].childNodes
+      document.getElementsByClassName('memberList')[0].childNodes
     );
     // style="transition: transform 600ms ease-in-out 150ms; transform: translateY(340px) translateX(-105%);"
     chatMemberList.forEach((element) => {
       const boxNo = element.classList[1];
-      element.style.transition = "none";
+      element.style.transition = 'none';
       element.style.transform = `translateY(${
         boxNo * boxSize
       }px) translateX(0)`;
