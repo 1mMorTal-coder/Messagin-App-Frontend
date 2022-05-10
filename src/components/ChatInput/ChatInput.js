@@ -30,7 +30,8 @@ const ChatInput = ({ message, setMessage, setSendMessage }) => {
     }
     function emojiPick(e) {
       setUserMessage((userMessage) => userMessage + e.detail.unicode);
-      messageDiv.current.innerText += e.detail.unicode;
+      console.log(messageDiv.current.innerText, e.detail.unicode);
+      messageDiv.current.innerText += e.detail.unicode.trim();
       // messageDiv.current.focus();
 
       //? Set cursor at end of text for content editable div , text area and input field
